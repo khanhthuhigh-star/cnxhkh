@@ -1,0 +1,1916 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BÁO CÁO NGHIÊN CỨU CHUYÊN ĐỀ: SỰ BIẾN ĐỔI CỦA GIA ĐÌNH VIỆT NAM HIỆN NAY</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Montserrat:ital,wght@0,600;0,700;0,800;0,900;1,700&family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      /* Mẫu màu nền đỏ kẻ ô và container be sữa chuẩn mẫu */
+      --bg-red-deep: #58090d;
+      --bg-red-main: #781016;
+      --bg-red-light: #9c1720;
+      --grid-line: rgba(255, 255, 255, 0.07);
+
+      --beige-milk: #fbf7ee;
+      --beige-card: #f6eedf;
+      --beige-card-hover: #ffffff;
+      --beige-border: #e6d7c3;
+      --beige-shadow: 0 14px 40px rgba(35, 4, 7, 0.45);
+
+      --text-dark: #261611;
+      --text-muted: #4e3831;
+      --text-red: #9e1821;
+      --text-cream: #fff9f2;
+      --accent-gold: #e2a048;
+
+      --font-art: 'Montserrat', sans-serif;
+      --font-serif: 'Playfair Display', serif;
+      --font-body: 'Be Vietnam Pro', sans-serif;
+      --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      background-color: var(--bg-red-main);
+      color: var(--text-dark);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      overflow: hidden;
+      position: relative;
+      user-select: none;
+    }
+
+    /* Mẫu nền đỏ ảnh tĩnh kẻ ô lưới chuẩn mẫu */
+    .red-canvas-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+      background-color: var(--bg-red-deep);
+      background-image:
+        radial-gradient(circle at 50% 25%, #9b1922 0%, #680c12 60%, #46060a 100%),
+        linear-gradient(var(--grid-line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+      background-size: 100% 100%, 42px 42px, 42px 42px;
+      background-position: center center;
+    }
+
+    /* Top App Bar tối giản */
+    .top-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 56px;
+      padding: 0 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 100;
+      background: rgba(70, 7, 11, 0.75);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .progress-track {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 3px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 6.25%;
+      background: linear-gradient(90deg, #f5a623, #ff4d4f, #fff);
+      box-shadow: 0 0 10px #ff4d4f;
+      transition: width 0.35s ease;
+    }
+
+    .deck-branding {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-icon {
+      width: 32px;
+      height: 32px;
+      background: #fff;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--bg-red-main);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .brand-text h1 {
+      font-size: 0.92rem;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: 0.5px;
+      font-family: var(--font-art);
+    }
+
+    .brand-text span {
+      font-size: 0.72rem;
+      color: #f7d294;
+      display: block;
+    }
+
+    .btn-action {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: #fff;
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--transition-smooth);
+    }
+
+    .btn-action:hover {
+      background: #fff;
+      color: var(--bg-red-main);
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.5);
+    }
+
+    /* Main Slides Viewport */
+    .presentation-viewport {
+      position: absolute;
+      top: 56px;
+      bottom: 64px;
+      left: 0;
+      right: 0;
+      overflow: hidden;
+      perspective: 1200px;
+      z-index: 10;
+    }
+
+    .slides-deck {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      padding: 24px 50px 20px 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      opacity: 0;
+      visibility: hidden;
+      transform: scale(0.95) translateY(24px);
+      transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+        opacity 0.55s ease,
+        visibility 0.55s ease;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+    }
+
+    .slide.active {
+      opacity: 1;
+      visibility: visible;
+      transform: scale(1) translateY(0);
+      z-index: 20;
+    }
+
+    .slide.prev-slide {
+      transform: scale(0.92) translateX(-60px);
+    }
+
+    .slide.next-slide {
+      transform: scale(0.92) translateX(60px);
+    }
+
+    /* Slide Header */
+    .slide-header-box {
+      text-align: center;
+      max-width: 1100px;
+      width: 100%;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 5;
+    }
+
+    .slide-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 4px 16px;
+      border-radius: 30px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      background: #ffffff;
+      color: var(--bg-red-main);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+      margin-bottom: 8px;
+    }
+
+    .slide-title {
+      font-family: var(--font-art);
+      font-size: 1.85rem;
+      font-weight: 900;
+      line-height: 1.3;
+      color: #ffffff;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      text-shadow: 0 3px 12px rgba(0, 0, 0, 0.45);
+      margin-bottom: 6px;
+    }
+
+    .slide-subtitle {
+      font-size: 0.95rem;
+      color: #fcebd2;
+      font-weight: 400;
+      max-width: 900px;
+      margin: 0 auto;
+      line-height: 1.5;
+    }
+
+    /* ĐƯỜNG RANH TĨNH (STATIC DIVIDER) giữa header và body */
+    .static-divider {
+      width: 80px;
+      height: 4px;
+      margin: 10px auto 6px auto;
+      background: #f7d294;
+      border-radius: 4px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Slide Body & Container be sữa */
+    .slide-body {
+      width: 100%;
+      max-width: 1160px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      z-index: 5;
+    }
+
+    .items-grid {
+      display: grid;
+      gap: 20px;
+      width: 100%;
+    }
+
+    .grid-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .grid-4 {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .grid-1-2 {
+      grid-template-columns: 1fr 1.6fr;
+    }
+
+    .grid-2-1 {
+      grid-template-columns: 1.6fr 1fr;
+    }
+
+    /* CONTAINER MÀU BE SỮA */
+    .milk-card {
+      background: var(--beige-milk);
+      border: 1px solid var(--beige-border);
+      border-radius: 20px;
+      padding: 24px 26px;
+      box-shadow: var(--beige-shadow);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      color: var(--text-dark);
+      transition: var(--transition-smooth);
+    }
+
+    .milk-card:hover {
+      background: var(--beige-card-hover);
+      transform: translateY(-4px);
+      box-shadow: 0 18px 45px rgba(25, 3, 5, 0.55);
+    }
+
+    .card-top-badge {
+      display: inline-flex;
+      align-items: center;
+      align-self: flex-start;
+      gap: 6px;
+      padding: 5px 14px;
+      background: var(--bg-red-main);
+      color: #ffffff;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      letter-spacing: 0.5px;
+    }
+
+    .card-title {
+      font-family: var(--font-art);
+      font-size: 1.22rem;
+      font-weight: 800;
+      color: var(--text-red);
+      line-height: 1.38;
+      margin-bottom: 12px;
+      border-bottom: 2px solid rgba(158, 24, 33, 0.15);
+      padding-bottom: 8px;
+    }
+
+    .card-content {
+      font-size: 0.94rem;
+      line-height: 1.7;
+      color: var(--text-dark);
+      flex-grow: 1;
+    }
+
+    .card-content p {
+      margin-bottom: 10px;
+    }
+
+    .card-content ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .card-content li {
+      position: relative;
+      padding-left: 22px;
+      margin-bottom: 9px;
+    }
+
+    .card-content li::before {
+      content: '■';
+      position: absolute;
+      left: 2px;
+      color: var(--bg-red-main);
+      font-size: 0.72rem;
+      top: 2px;
+    }
+
+    .highlight-pill {
+      display: inline-block;
+      font-weight: 700;
+      color: var(--bg-red-main);
+      background: rgba(158, 24, 33, 0.1);
+      padding: 2px 8px;
+      border-radius: 6px;
+    }
+
+    /* BẢNG MÀU BE SỮA */
+    .custom-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.95rem;
+      background: var(--beige-milk);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--beige-shadow);
+    }
+
+    .custom-table th {
+      background: var(--bg-red-main);
+      color: #ffffff;
+      padding: 16px 22px;
+      font-weight: 800;
+      font-family: var(--font-art);
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .custom-table td {
+      padding: 15px 22px;
+      border-bottom: 1px solid var(--beige-border);
+      color: var(--text-dark);
+      line-height: 1.65;
+    }
+
+    .custom-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .custom-table tr:hover td {
+      background: #fff;
+    }
+
+    /* SLIDE 1: BÌA BÁO CÁO KÉO CHÍNH GIỮA, CỠ CHỮ LỚN, PHÔNG NGHỆ THUẬT, BỎ TÀI LIỆU THAM KHẢO */
+    .title-slide-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 72vh;
+      text-align: center;
+      max-width: 1050px;
+      margin: auto;
+    }
+
+    .hero-main-badge {
+      display: inline-block;
+      padding: 8px 24px;
+      background: #ffffff;
+      color: var(--bg-red-main);
+      border-radius: 40px;
+      font-size: 0.95rem;
+      font-weight: 900;
+      font-family: var(--font-art);
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+      margin-bottom: 24px;
+    }
+
+    .hero-title-art {
+      font-family: var(--font-art);
+      font-size: 2.85rem;
+      font-weight: 900;
+      color: #ffffff;
+      line-height: 1.25;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 24px;
+      text-shadow:
+        0 2px 0 #52080c,
+        0 4px 0 #420609,
+        0 6px 0 #310407,
+        0 10px 25px rgba(0, 0, 0, 0.7);
+    }
+
+    .hero-subtitle-art {
+      font-family: var(--font-art);
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: #fde8c8;
+      letter-spacing: 0.5px;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    }
+
+    /* SLIDE KẾT THÚC */
+    .ending-slide-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 72vh;
+      text-align: center;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .ending-title {
+      font-family: var(--font-art);
+      font-size: 3.2rem;
+      font-weight: 900;
+      color: #ffffff;
+      text-shadow:
+        0 2px 0 #52080c,
+        0 5px 0 #380407,
+        0 12px 30px rgba(0, 0, 0, 0.7);
+      margin-bottom: 24px;
+    }
+
+    /* ========================================================
+       PHẦN 3: TƯƠNG TÁC NHẢY VỀ GÓC TRÁI VÀ CẤU TRÚC HÌNH SAO
+       ======================================================== */
+
+    .morph-wrapper {
+      width: 100%;
+      max-width: 1100px;
+      position: relative;
+      min-height: 480px;
+    }
+
+    /* Chế độ Tổng quan ban đầu của 3.1: 4 button đều nhau */
+    .grid-4-overview {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      width: 100%;
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Nút bấm ở trạng thái tổng quan */
+    .btn-morph-item {
+      background: var(--beige-milk);
+      border: 2px solid var(--beige-border);
+      border-radius: 18px;
+      padding: 22px 24px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: var(--beige-shadow);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      text-align: left;
+    }
+
+    .btn-morph-item:hover {
+      background: #ffffff;
+      border-color: var(--bg-red-light);
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
+    }
+
+    .btn-morph-badge {
+      width: 34px;
+      height: 34px;
+      background: var(--bg-red-main);
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-family: var(--font-art);
+      font-size: 0.95rem;
+      flex-shrink: 0;
+    }
+
+    .btn-morph-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      line-height: 1.45;
+    }
+
+    .btn-morph-hint {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--bg-red-main);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 4px;
+    }
+
+    /* CẤU TRÚC HÌNH SAO CHO 3.2 (5 MỤC KÍCH THƯỚC ĐỀU NHAU) */
+    .star-stage-container {
+      position: relative;
+      width: 960px;
+      height: 480px;
+      margin: 0 auto;
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .star-center-emblem {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #ffffff 0%, #f6eedf 100%);
+      border: 3px solid #f7d294;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 12px;
+      z-index: 2;
+    }
+
+    .star-center-emblem span {
+      font-family: var(--font-art);
+      font-size: 0.78rem;
+      font-weight: 900;
+      color: var(--bg-red-main);
+      text-transform: uppercase;
+      line-height: 1.3;
+    }
+
+    .star-svg-lines {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* 5 nút kích thước đều nhau hoàn toàn trên cấu trúc hình sao */
+    .star-node-btn {
+      position: absolute;
+      width: 250px;
+      height: 110px;
+      background: var(--beige-milk);
+      border: 2px solid var(--beige-border);
+      border-radius: 18px;
+      padding: 14px 18px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      box-shadow: var(--beige-shadow);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 3;
+    }
+
+    .star-node-btn:hover {
+      background: #ffffff;
+      border-color: #f7d294;
+      transform: scale(1.05);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Tọa độ 5 đỉnh hình sao đều đặn */
+    /* Đỉnh 1: Trên cùng */
+    .star-pos-1 {
+      top: 6px;
+      left: calc(50% - 125px);
+    }
+
+    /* Đỉnh 2: Phía trên bên phải */
+    .star-pos-2 {
+      top: 125px;
+      right: 25px;
+    }
+
+    /* Đỉnh 3: Phía dưới bên phải */
+    .star-pos-3 {
+      bottom: 25px;
+      right: 120px;
+    }
+
+    /* Đỉnh 4: Phía dưới bên trái */
+    .star-pos-4 {
+      bottom: 25px;
+      left: 120px;
+    }
+
+    /* Đỉnh 5: Phía trên bên trái */
+    .star-pos-5 {
+      top: 125px;
+      left: 25px;
+    }
+
+    /* CHẾ ĐỘ CHI TIẾT: CÁC NÚT NHẢY VỀ GÓC TRÁI XẾP TỪ TRÊN XUỐNG DƯỚI */
+    .split-layout-active {
+      display: flex;
+      gap: 24px;
+      width: 100%;
+      align-items: stretch;
+      animation: fadeInSplit 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes fadeInSplit {
+      0% {
+        opacity: 0;
+        transform: translateY(15px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Cột góc trái xếp từ trên xuống */
+    .left-sidebar-stack {
+      width: 380px;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .left-stack-btn {
+      background: var(--beige-milk);
+      border: 2px solid var(--beige-border);
+      border-radius: 16px;
+      padding: 14px 18px;
+      min-height: 78px;
+      cursor: pointer;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+      text-align: left;
+    }
+
+    .left-stack-btn-text {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      line-height: 1.45;
+      flex-grow: 1;
+    }
+
+    .left-stack-btn:hover {
+      background: #ffffff;
+      border-color: #f7d294;
+      transform: translateX(4px);
+    }
+
+    .left-stack-btn.active-item {
+      background: #ffffff !important;
+      border-color: var(--bg-red-light) !important;
+      box-shadow: 0 0 0 2px var(--accent-gold), 0 8px 24px rgba(0, 0, 0, 0.35) !important;
+      transform: translateX(6px);
+    }
+
+    .left-stack-btn.active-item .btn-morph-badge {
+      background: var(--bg-red-light);
+      box-shadow: 0 0 8px var(--accent-gold);
+    }
+
+    .btn-return-overview {
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: #fff;
+      padding: 8px 14px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin-bottom: 4px;
+      transition: var(--transition-smooth);
+    }
+
+    .btn-return-overview:hover {
+      background: #fff;
+      color: var(--bg-red-main);
+    }
+
+    /* Khối nội dung chi tiết bên phải */
+    .right-content-card {
+      flex-grow: 1;
+      background: var(--beige-milk);
+      border: 1px solid var(--beige-border);
+      border-radius: 20px;
+      padding: 28px 32px;
+      box-shadow: var(--beige-shadow);
+      display: flex;
+      flex-direction: column;
+      animation: fadeInContent 0.35s ease forwards;
+    }
+
+    @keyframes fadeInContent {
+      0% {
+        opacity: 0;
+        transform: scale(0.97);
+      }
+
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    /* Bottom Bar tối giản: Chỉ để lại số thứ tự chỉ trang và nút tiến/lùi */
+    .bottom-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 64px;
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 100;
+      background: rgba(65, 7, 11, 0.9);
+      backdrop-filter: blur(12px);
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .slide-counter {
+      font-family: var(--font-art);
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: 1px;
+    }
+
+    .slide-counter span {
+      color: #f7d294;
+      font-size: 1rem;
+    }
+
+    .nav-controls {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .btn-nav {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: none;
+      color: var(--bg-red-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+      transition: var(--transition-smooth);
+    }
+
+    .btn-nav:hover:not(:disabled) {
+      background: #f7d294;
+      transform: scale(1.1);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+    }
+
+    .btn-nav:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+
+    @media (max-width: 1024px) {
+      .hero-title-art {
+        font-size: 2.2rem;
+      }
+
+      .slide {
+        padding: 20px 30px;
+      }
+
+      .star-stage-container {
+        width: 100%;
+        height: 420px;
+      }
+
+      .star-node-btn {
+        width: 200px;
+        height: 95px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero-title-art {
+        font-size: 1.7rem;
+      }
+
+      .hero-subtitle-art {
+        font-size: 1.1rem;
+      }
+
+      .slide-title {
+        font-size: 1.4rem;
+      }
+
+      .split-layout-active {
+        flex-direction: column;
+      }
+
+      .left-sidebar-stack {
+        width: 100%;
+      }
+
+      .bottom-bar {
+        padding: 0 20px;
+      }
+
+      .top-bar {
+        padding: 0 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Mẫu nền đỏ ảnh tĩnh kẻ ô lưới -->
+  <div class="red-canvas-bg"></div>
+
+  <!-- Top App Bar tối giản -->
+  <header class="top-bar">
+    <div class="deck-branding">
+      <div class="brand-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+          <polyline points="9 22 9 12 15 12 15 22"></polyline>
+        </svg>
+      </div>
+      <div class="brand-text">
+        <h1>GIA ĐÌNH VIỆT NAM HIỆN NAY</h1>
+        <span>Chủ nghĩa xã hội khoa học — Báo cáo nghiên cứu chuyên đề</span>
+      </div>
+    </div>
+
+    <button class="btn-action" id="btnFullscreen" title="Toàn màn hình (F11)">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+      </svg>
+      Toàn Màn Hình
+    </button>
+
+    <div class="progress-track">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+  </header>
+
+  <!-- Presentation Slides Viewport -->
+  <main class="presentation-viewport">
+    <div class="slides-deck" id="slidesDeck">
+
+      <!-- SLIDE 1: BÌA BÁO CÁO (KÉO CHÍNH GIỮA, CỠ CHỮ LỚN, PHÔNG NGHỆ THUẬT, BỎ TÀI LIỆU THAM KHẢO) -->
+      <section class="slide active" data-slide="1">
+        <div class="title-slide-container">
+          <div class="hero-main-badge">BÁO CÁO NGHIÊN CỨU CHUYÊN ĐỀ</div>
+          <h2 class="hero-title-art">SỰ BIẾN ĐỔI CỦA GIA ĐÌNH VIỆT NAM HIỆN NAY<br>— KHÓ KHĂN THỰC TIỄN VÀ GIẢI PHÁP XÂY
+            DỰNG GIA ĐÌNH HẠNH PHÚC</h2>
+          <p class="hero-subtitle-art">Học phần: Chủ nghĩa xã hội khoa học</p>
+          <div class="static-divider"></div>
+        </div>
+      </section>
+
+      <!-- SLIDE 2: 1.1. Biến đổi quy mô và kết cấu gia đình (XU HƯỚNG & SỐ LIỆU GSO) -->
+      <section class="slide" data-slide="2">
+        <div class="slide-header-box">
+          <span class="slide-tag">PHẦN 1: PHÂN TÍCH SỰ BIẾN ĐỔI CỦA GIA ĐÌNH VIỆT NAM HIỆN NAY</span>
+          <h2 class="slide-title">1.1. Biến đổi quy mô và kết cấu gia đình</h2>
+          <p class="slide-subtitle">Trạng thái "gia đình quá độ" — thích ứng linh hoạt với nền kinh tế công nghiệp và đô
+            thị hóa</p>
+          <div class="static-divider"></div>
+        </div>
+
+        <div class="slide-body">
+          <div class="milk-card" style="max-width: 950px; width: 100%;">
+            <div class="card-top-badge">Xu hướng nổi bật nhất hiện nay</div>
+            <div class="card-title">Sự thu nhỏ quy mô và sự phổ biến của gia đình hạt nhân</div>
+            <div class="card-content">
+              <p>Trong xã hội nông nghiệp cổ truyền, mô hình gia đình mở rộng đa thế hệ ("tam đại đồng đường", "tứ đại
+                đồng đường") chiếm vị thế chủ đạo nhằm đáp ứng yêu cầu tập trung sức lao động canh tác lúa nước và nếp
+                sống tự cấp tự túc. Tuy nhiên, bước vào thời kỳ quá độ, thiết chế gia đình Việt Nam đã tiến vào trạng
+                thái "gia đình quá độ" — một hình thái trung gian linh hoạt thích ứng với nền kinh tế công nghiệp và đô
+                thị hóa.</p>
+              <ul>
+                <li>Xu hướng nổi bật nhất hiện nay là sự thu nhỏ quy mô và sự phổ biến của gia đình hạt nhân (gia đình
+                  đơn chỉ gồm hai thế hệ: cha mẹ và con cái).</li>
+                <li>Theo số liệu của Tổng cục Thống kê (GSO), quy mô hộ gia đình bình quân cả nước đã giảm liên tục: từ
+                  <span class="highlight-pill">4,84 người/hộ (1989)</span> xuống <span class="highlight-pill">4,61
+                    (1999)</span>, <span class="highlight-pill">3,8 (2009)</span>, <span class="highlight-pill">3,6
+                    (2019)</span> và tiếp tục duy trì ở mức <span class="highlight-pill">3,5 – 3,6 người/hộ giai đoạn
+                    2023 – 2025</span>.
+                </li>
+                <li>Hiện nay, hộ gia đình hạt nhân đã chiếm trên <span class="highlight-pill">60% – 70%</span> tổng số
+                  hộ gia đình trong toàn quốc.</li>
+                <li>Làn sóng di cư lao động từ nông thôn ra các đô thị lớn và khu công nghiệp (như TP. Hồ Chí Minh, Hà
+                  Nội, Bình Dương, Đồng Nai) đã hình thành hàng triệu hộ gia đình hạt nhân trẻ sống độc lập tại các khu
+                  chung cư và nhà trọ.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 3: 1.1. TÁCH RIÊNG MẶT TÍCH CỰC VÀ TIÊU CỰC -->
+      <section class="slide" data-slide="3">
+        <div class="slide-header-box">
+          <span class="slide-tag">PHẦN 1: PHÂN TÍCH SỰ BIẾN ĐỔI CỦA GIA ĐÌNH VIỆT NAM HIỆN NAY</span>
+          <h2 class="slide-title">1.1. Biến đổi quy mô và kết cấu gia đình</h2>
+          <p class="slide-subtitle">Tác động hai mặt biện chứng duy vật của quá trình thu nhỏ quy mô gia đình</p>
+          <div class="static-divider"></div>
+        </div>
+
+        <div class="slide-body">
+          <div class="items-grid grid-2">
+            <div class="milk-card">
+              <div class="card-top-badge" style="background: #1e7e34;">Tác động tích cực</div>
+              <div class="card-content">
+                <p>Gia đình hạt nhân đề cao tính tự chủ, quyền tự do cá nhân và sự bình đẳng giữa các thành viên;</p>
+                <p>Giải phóng phụ nữ khỏi gánh nặng phục tùng gia tộc truyền thống;</p>
+                <p>Đồng thời hạn chế tối đa các mâu thuẫn sinh hoạt thế hệ (như mâu thuẫn mẹ chồng – nàng dâu).</p>
+              </div>
+            </div>
+
+            <div class="milk-card">
+              <div class="card-top-badge" style="background: var(--bg-red-main);">Tác động tiêu cực</div>
+              <div class="card-content">
+                <p>Sự tách rời không gian cư trú làm giảm sự gắn kết huyết thống mở rộng, gây khó khăn trong việc lưu
+                  giữ và trao truyền các giá trị văn hóa gia phong truyền thống.</p>
+                <p>Đồng thời, các thành viên dễ rơi vào vòng xoáy mưu sinh, giảm thời gian giao tiếp cảm xúc, khiến quan
+                  hệ gia đình có nguy cơ trở nên lỏng lẻo.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 4: 1.2. Chức năng tái sản xuất con người & kinh tế (BỎ a, b TRONG CONTAINER) -->
+      <section class="slide" data-slide="4">
+        <div class="slide-header-box">
+          <span class="slide-tag">PHẦN 1: PHÂN TÍCH SỰ BIẾN ĐỔI CỦA GIA ĐÌNH VIỆT NAM HIỆN NAY</span>
+          <h2 class="slide-title">1.2. Biến đổi các chức năng cơ bản của gia đình</h2>
+          <p class="slide-subtitle">Chuyển dịch chức năng tái sản xuất ra con người và kinh tế, tổ chức tiêu dùng</p>
+          <div class="static-divider"></div>
+        </div>
+
+        <div class="slide-body">
+          <div class="items-grid grid-2">
+            <div class="milk-card">
+
+              <div class="card-title">Chức năng tái sản xuất ra con người</div>
+              <div class="card-content">
+                <ul>
+                  <li>Chức năng tái sản xuất ra con người — chức năng đặc thù không một cộng đồng nào có thể thay thế —
+                    đã chuyển biến mạnh mẽ từ sinh đẻ tự nhiên sang sinh đẻ chủ động, tự giác nhờ sự phát triển của y
+                    học và ý thức kế hoạch hóa gia đình.</li>
+                  <li>Quan niệm xã hội đã thay đổi căn bản: từ chỗ coi trọng sinh đông con ("trời sinh voi sinh cỏ") và
+                    bắt buộc phải có con trai nối dõi tông đường sang việc giảm số con mong muốn, chú trọng chất lượng
+                    nuôi dạy.</li>
+                  <li>Tổng tỷ suất sinh (TFR) giảm từ trên 6 con (thập niên 1960) xuống mức sinh thay thế 2,09 con (năm
+                    2019) và còn khoảng <span class="highlight-pill">1,91 – 1,96 con/phụ nữ giai đoạn 2023 – 2024</span>
+                    (tại TP.HCM chỉ đạt từ 1,32 – 1,39 con/phụ nữ).</li>
+                  <li>Tàn dư tâm lý trọng nam vẫn khiến tỷ số giới tính khi sinh duy trì ở mức chênh lệch cao: <span
+                      class="highlight-pill">111 – 112 bé trai/100 bé gái</span>.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="milk-card">
+
+              <div class="card-title">Chức năng kinh tế và tổ chức tiêu dùng</div>
+              <div class="card-content">
+                <p>Kinh tế gia đình đã trải qua hai bước chuyển mang tính bước ngoặt:</p>
+                <ul>
+                  <li><strong>Bước chuyển thứ nhất:</strong> Từ kinh tế tự cấp tự túc thành kinh tế hàng hóa.</li>
+                  <li><strong>Bước chuyển thứ hai:</strong> Từ sản xuất đáp ứng thị trường nội địa thành tổ chức kinh tế
+                    tham gia vào chuỗi giá trị thị trường toàn cầu.</li>
+                  <li>Hiện nay, khu vực kinh tế hộ gia đình đóng góp tới khoảng <span class="highlight-pill">30% GDP
+                      quốc gia</span> và tạo việc làm cho hàng chục triệu lao động.</li>
+                  <li>Gia đình không còn là đơn vị sản xuất khép kín mà trở thành chủ thể sản xuất kinh doanh linh hoạt
+                    và là đơn vị tiêu dùng quan trọng của xã hội.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 5: 1.2. Chức năng giáo dục & tình cảm (BỎ c, d TRONG CONTAINER) -->
+      <section class="slide" data-slide="5">
+        <div class="slide-header-box">
+          <span class="slide-tag">PHẦN 1: PHÂN TÍCH SỰ BIẾN ĐỔI CỦA GIA ĐÌNH VIỆT NAM HIỆN NAY</span>
+          <h2 class="slide-title">1.2. Biến đổi các chức năng cơ bản của gia đình (tiếp theo)</h2>
+          <p class="slide-subtitle">Chuyển dịch chức năng giáo dục (xã hội hóa) và thỏa mãn nhu cầu tâm sinh lý, duy trì
+            tình cảm</p>
+          <div class="static-divider"></div>
+        </div>
+
+        <div class="slide-body">
+          <div class="items-grid grid-2">
+            <div class="milk-card">
+
+              <div class="card-title">Chức năng giáo dục (xã hội hóa)</div>
+              <div class="card-content">
+                <ul>
+                  <li>Đã có sự đảo chiều nhất định về vị thế giữa giáo dục gia đình và giáo dục xã hội: Trong xã hội
+                    hiện đại, giáo dục nhà trường và xã hội bao trùm, giữ vai trò định hướng chính đối với giáo dục gia
+                    đình.</li>
+                  <li>Đầu tư tài chính của cha mẹ cho học vấn, ngoại ngữ và kỹ năng công nghệ của con cái gia tăng mạnh
+                    mẽ (chiếm <span class="highlight-pill">20% – 35% thu nhập</span> hộ gia đình ở đô thị).</li>
+                  <li><strong>Nghịch lý đặt ra là:</strong> nhiều cha mẹ vì mưu sinh đã buông lỏng việc trực tiếp uốn
+                    nắn đạo đức, "khoán trắng" giáo dục nhân cách cho nhà trường và thiết bị công nghệ (mạng xã hội,
+                    Internet).</li>
+                  <li>Văn kiện Đại hội XIII của Đảng (2021) nhấn mạnh yêu cầu phải kết hợp chặt chẽ giữa giáo dục gia
+                    đình, nhà trường và xã hội để hình thành chuẩn mực con người Việt Nam thời đại mới.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="milk-card">
+
+              <div class="card-title">Chức năng thỏa mãn nhu cầu tâm sinh lý, duy trì tình cảm</div>
+              <div class="card-content">
+                <ul>
+                  <li>Gia đình Việt Nam chuyển đổi từ chủ yếu là một "đơn vị kinh tế" sang chủ yếu là một "đơn vị tình
+                    cảm".</li>
+                  <li>Chất lượng đời sống tinh thần, sự lắng nghe, chia sẻ và tôn trọng tự do cá nhân trở thành thước đo
+                    hàng đầu quyết định sự tồn tại của mái ấm.</li>
+                  <li>Sự chuyển dịch này đáp ứng nhu cầu cân bằng tâm lý của con người trước áp lực nhịp sống công
+                    nghiệp.</li>
+                  <li>Dù vậy, quy mô gia đình ít con và guồng quay công việc đang làm gia tăng tình trạng cô lập cảm
+                    xúc, tạo ra hiện tượng <span class="highlight-pill">"cô đơn trong chính ngôi nhà của mình"</span> ở
+                    cả người cao tuổi lẫn thanh thiếu niên.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 6: 1.3. Biến đổi quan hệ gia đình (BỎ a, b TRONG CONTAINER) -->
+      <section class="slide" data-slide="6">
+        <div class="slide-header-box">
+          <span class="slide-tag">PHẦN 1: PHÂN TÍCH SỰ BIẾN ĐỔI CỦA GIA ĐÌNH VIỆT NAM HIỆN NAY</span>
+          <h2 class="slide-title">1.3. Biến đổi quan hệ gia đình và các giá trị, chuẩn mực văn hóa</h2>
+          <p class="slide-subtitle">Quan hệ hôn nhân, mô hình quyền lực và chuẩn mực văn hóa giữa các thế hệ</p>
+          <div class="static-divider"></div>
+        </div>
+
+        <div class="slide-body">
+          <div class="items-grid grid-2">
+            <div class="milk-card">
+              <div class="card-top-badge">a</div>
+              <div class="card-title">Quan hệ hôn nhân và mô hình quyền lực</div>
+              <div class="card-content">
+                <p>Dưới tác động của tư tưởng bình đẳng giới, mô hình gia trưởng độc tôn trong gia đình truyền thống đã
+                  bị suy giải. Gia đình Việt Nam hiện nay tồn tại song song ba mô hình làm chủ:</p>
+                <ul>
+                  <li>Mô hình người chồng làm chủ</li>
+                  <li>Mô hình người vợ làm chủ</li>
+                  <li>Mô hình cả hai vợ chồng cùng làm chủ</li>
+                </ul>
+                <p>Tiêu chí xác lập người chủ gia đình mới dựa trên năng lực, phẩm chất và sự đóng góp thực tế (phù hợp
+                  Điều 36 Hiến pháp năm 2013 và Luật Hôn nhân và Gia đình năm 2014).</p>
+                <p><strong>Mặt trái:</strong> Cả nước xử lý khoảng <strong>60.000 vụ ly hôn mỗi năm</strong>, trong đó
+                  tỷ lệ ly hôn ở các cặp vợ chồng trẻ (18 – 30 tuổi) chiếm tới <span class="highlight-pill">60% –
+                    70%</span>.</p>
+              </div>
+            </div>
+
+            <div class="milk-card">
+              <div class="card-top-badge">b</div>
+              <div class="card-title">Quan hệ giữa các thế hệ và chuẩn mực văn hóa gia đình</div>
+              <div class="card-content">
+                <ul>
+                  <li>Sự khác biệt về môi trường trưởng thành khiến khoảng cách thế hệ giữa ông bà, cha mẹ và con cái
+                    ngày càng bị nới rộng (đối lập giữa chuẩn mực truyền thống với lối sống đề cao cái tôi cá nhân).
+                  </li>
+                  <li>Các giá trị đạo đức cốt lõi ("hiếu thảo", "thủy chung", "kính trên nhường dưới") đang bị thử thách
+                    nghiêm trọng bởi lối sống thực dụng.</li>
+                  <li>Tình trạng bạo lực gia đình (thể xác, tinh thần, kinh tế) cùng tệ nạn xã hội xâm nhập đã làm rạn
+                    nứt sự bền vững của nhiều hộ gia đình.</li>
+                  <li>Luật Phòng, chống bạo lực gia đình năm 2022 đã nhận diện <span class="highlight-pill">16 hành vi
+                      bạo lực</span> để bảo vệ quyền lợi các thành viên yếu thế.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 7: PHẦN 2 — CÁC KHÓ KHĂN VÀ THÁCH THỨC CỐT LÕI HIỆN NAY (BẢNG TỔNG HỢP) -->
+      <section class="slide" data-slide="7">
+        <div class="slide-header-box">
+          <span class="slide-tag">PHẦN 2: NHỮNG KHÓ KHĂN VÀ THÁCH THỨC CỐT LÕI</span>
+          <h2 class="slide-title">CÁC KHÓ KHĂN VÀ THÁCH THỨC CỐT LÕI HIỆN NAY</h2>
+          <p class="slide-subtitle">Bảng tổng hợp nhận diện các mâu thuẫn mang tính cấu trúc mà thiết chế gia đình hiện
+            đại đang phải gánh vác</p>
+          <div class="static-divider"></div>
+        </div>
+
+        <div class="slide-body">
+          <div style="max-width: 1000px; width: 100%;">
+            <table class="custom-table">
+              <thead>
+                <tr>
+                  <th style="width: 45%;">Lĩnh vực khó khăn</th>
+                  <th style="width: 55%;">Biểu hiện thực tiễn</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>1. Kinh tế và áp lực mưu sinh</strong></td>
+                  <td>Chi phí sinh hoạt, y tế, giáo dục cao; phân hóa giàu nghèo.</td>
+                </tr>
+                <tr>
+                  <td><strong>2. Gắn kết tình cảm & Thời gian</strong></td>
+                  <td>"Khủng hoảng thời gian"; suy giảm giao tiếp; ly hôn trẻ.</td>
+                </tr>
+                <tr>
+                  <td><strong>3. Chức năng giáo dục & Chăm sóc</strong></td>
+                  <td>Khoán trắng giáo dục; cô đơn ở người già và trẻ nhỏ.</td>
+                </tr>
+                <tr>
+                  <td><strong>4. Giá trị văn hóa & Thế hệ</strong></td>
+                  <td>Xung đột thế hệ; lối sống thực dụng; bạo lực gia đình.</td>
+                </tr>
+                <tr>
+                  <td><strong>5. Tâm lý hôn nhân thế hệ trẻ</strong></td>
+                  <td>Ngại kết hôn, lười sinh con; giảm mức sinh quốc gia.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 8: 2.1 -->
+      <section class="slide" data-slide="8">
+        <div class="slide-header-box">
+          <span class="slide-tag">PHẦN 2: NHỮNG KHÓ KHĂN VÀ THÁCH THỨC CỐT LÕI</span>
+          <h2 class="slide-title">2.1. Áp lực kinh tế và nguy cơ tổn thương của hộ gia đình nhỏ trước biến động thị
+            trường</h2>
+          <div class="static-divider"></div>
+        </div>
+
+        <div class="slide-body">
+          <div class="milk-card" style="max-width: 950px; width: 100%;">
+            <div class="card-top-badge">1: Kinh tế & Mưu sinh</div>
+            <div class="card-title">Nguy cơ tổn thương tài chính trước biến động thị trường</div>
+            <div class="card-content" style="font-size: 1.05rem; line-height: 1.8;">
+              <p>Trong nền kinh tế thị trường, các hộ gia đình phải tự gánh vác toàn bộ rủi ro tài chính.</p>
+              <p>Chi phí tích lũy nhà ở, chăm sóc y tế và giáo dục chất lượng cao tại các đô thị tăng nhanh vượt tốc độ
+                tăng thu nhập bình quân.</p>
+              <p>Sự phân hóa giàu – nghèo sâu sắc tạo ra áp lực tâm lý lớn lên các hộ gia đình thu nhập thấp.</p>
+              <p>Đồng thời, các hộ sản xuất kinh doanh nhỏ lẻ bộc lộ sự yếu thế trước làn sóng cạnh tranh của các tập
+                đoàn đa quốc gia và thương mại điện tử xuyên biên giới, dễ rơi vào tình trạng bất ổn kinh tế khi gặp
+                khủng hoảng.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 9: 2.2 -->
+      <section class="slide" data-slide="9">
+        <div class="slide-header-box">
+          <span class="slide-tag">PHẦN 2: NHỮNG KHÓ KHĂN VÀ THÁCH THỨC CỐT LÕI</span>
+          <h2 class="slide-title">2.2. Sự suy giảm liên kết tình cảm, khủng hoảng thời gian và nguy cơ rạn nứt hôn nhân
+          </h2>
+          <div class="static-divider"></div>
+        </div>
+
+        <div class="slide-body">
+          <div class="milk-card" style="max-width: 950px; width: 100%;">
+            <div class="card-top-badge">2: Tình cảm & Thời gian</div>
+            <div class="card-title">"Khủng hoảng thời gian" và nguy cơ rạn nứt hôn nhân</div>
+            <div class="card-content" style="font-size: 1.05rem; line-height: 1.8;">
+              <p>Cuộc sống công nghiệp với cường độ lao động cao và thời gian làm việc kéo dài khiến quỹ thời gian dành
+                cho gia đình bị thu hẹp nghiêm trọng.</p>
+              <p>Sự bùng nổ của các thiết bị thông minh và mạng xã hội vô hình trung tạo ra rào cản giao tiếp trực tiếp
+                giữa các thành viên.</p>
+              <p>Khi các mâu thuẫn phát sinh nhưng thiếu không gian đối thoại tình cảm, tính cam kết trách nhiệm bị suy
+                giảm, dẫn đến tỷ lệ ly thân, ly hôn gia tăng nhanh chóng, đặc biệt ở các cặp vợ chồng trẻ.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 10: 2.3 -->
+      <section class="slide" data-slide="10">
+        <div class="slide-header-box">
+          <span class="slide-tag">PHẦN 2: NHỮNG KHÓ KHĂN VÀ THÁCH THỨC CỐT LÕI</span>
+          <h2 class="slide-title">2.3. Khó khăn trong thực hiện chức năng giáo dục con cái và sự buông lỏng quản lý nhân
+            cách</h2>
+          <div class="static-divider"></div>
+        </div>
+
+        <div class="slide-body">
+          <div class="milk-card" style="max-width: 950px; width: 100%;">
+            <div class="card-top-badge">3: Giáo dục & Nhân cách</div>
+            <div class="card-title">Khoán trắng giáo dục và thách thức quản lý con trẻ thời đại số</div>
+            <div class="card-content" style="font-size: 1.05rem; line-height: 1.8;">
+              <p>Việc cha mẹ bận rộn mưu sinh dẫn tới tình trạng buông lỏng việc theo sát tâm sinh lý của con cái,
+                "khoán trắng" trách nhiệm giáo dục cho nhà trường.</p>
+              <p>Trẻ em thiếu sự kèm cặp trực tiếp từ gia đình dễ bị tác động tiêu cực bởi các thông tin độc hại, bạo
+                lực trên không gian mạng, dẫn đến tình trạng lệch chuẩn hành vi, gia tăng bạo lực học đường và khủng
+                hoảng tâm lý tuổi vị thành niên.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 11: 2.4 -->
+      <section class="slide" data-slide="11">
+        <div class="slide-header-box">
+          <span class="slide-tag">PHẦN 2: NHỮNG KHÓ KHĂN VÀ THÁCH THỨC CỐT LÕI</span>
+          <h2 class="slide-title">2.4. Xung đột giá trị thế hệ và những thách thức trong phụng dưỡng người cao tuổi</h2>
+          <div class="static-divider"></div>
+        </div>
+
+        <div class="slide-body">
+          <div class="milk-card" style="max-width: 950px; width: 100%;">
+            <div class="card-top-badge">4: Thế hệ & Người cao tuổi</div>
+            <div class="card-title">Xung đột tư duy sống và mạng lưới an sinh gia đình suy giảm</div>
+            <div class="card-content" style="font-size: 1.05rem; line-height: 1.8;">
+              <p>Sự thu nhỏ quy mô gia đình hạt nhân khiến mạng lưới an sinh gia đình bị suy giảm.</p>
+              <p>Người cao tuổi ở nông thôn đối mặt với tình trạng cô đơn khi con cái di cư làm ăn xa; trong khi ở đô
+                thị, việc thiếu không gian sống và sự bất đồng quan điểm nuôi dạy con cái giữa các thế hệ dễ dẫn đến
+                xung đột tinh thần gay gắt.</p>
+              <p>Thêm vào đó, hệ thống dịch vụ chăm sóc xã hội chưa phát triển tương thích với tốc độ già hóa dân số
+                nhanh chóng của đất nước.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 12: 2.5 -->
+      <section class="slide" data-slide="12">
+        <div class="slide-header-box">
+          <span class="slide-tag">PHẦN 2: NHỮNG KHÓ KHĂN VÀ THÁCH THỨC CỐT LÕI</span>
+          <h2 class="slide-title">2.5. Xu hướng "ngại kết hôn, lười sinh con" và đe dọa đến cấu trúc nhân số học quốc
+            gia</h2>
+          <div class="static-divider"></div>
+        </div>
+
+        <div class="slide-body">
+          <div class="milk-card" style="max-width: 950px; width: 100%;">
+            <div class="card-top-badge">5: Dân số học</div>
+            <div class="card-title">Mức sinh giảm sâu và nguy cơ "già trước khi giàu"</div>
+            <div class="card-content" style="font-size: 1.05rem; line-height: 1.8;">
+              <p>Trước gánh nặng tài chính, chi phí nuôi dạy con cái đắt đỏ và nỗi lo về tính bất ổn của hôn nhân hiện
+                đại, một bộ phận không nhỏ thanh niên có tâm lý trì hoãn hoặc lười kết hôn, ngại sinh con.</p>
+              <p>Hiện tượng mức sinh giảm sâu dưới mức sinh thay thế tại các vùng kinh tế trọng điểm đang đẩy Việt Nam
+                đối mặt với rủi ro thiếu hụt nguồn nhân lực lao động trẻ và nguy cơ "già trước khi giàu".</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 13: 3.1. PHƯƠNG HƯỚNG CHIẾN LƯỢC (TƯƠNG TÁC NHẢY VỀ GÓC TRÁI XẾP TỪ TRÊN XUỐNG) -->
+      <section class="slide" data-slide="13">
+        <div class="slide-header-box">
+          <span class="slide-tag">PHẦN 3: PHƯƠNG HƯỚNG PHÁT TRIỂN VÀ TRÁCH NHIỆM CỦA THẾ HỆ TRẺ</span>
+          <h2 class="slide-title">3.1. Phương hướng chiến lược của Đảng và Nhà nước về phát triển gia đình Việt Nam hiện
+            nay</h2>
+          <p class="slide-subtitle"></p>
+          <div class="static-divider"></div>
+        </div>
+
+        <div class="slide-body">
+          <div class="morph-wrapper" id="morphContainer31">
+
+            <!-- Trạng thái 1: 4 button ở dạng tổng quan ban đầu -->
+            <div class="grid-4-overview" id="overviewGrid31">
+              <div class="btn-morph-item" onclick="activateItem31(0)">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                  <div class="btn-morph-badge">1</div>
+                  <div class="btn-morph-title">Tăng cường sự lãnh đạo của Đảng, nâng cao nhận thức của xã hội</div>
+                </div>
+                <div class="btn-morph-hint"></div>
+              </div>
+
+              <div class="btn-morph-item" onclick="activateItem31(1)">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                  <div class="btn-morph-badge">2</div>
+                  <div class="btn-morph-title">Đẩy mạnh phát triển KT-XH, nâng cao đời sống và kinh tế hộ</div>
+                </div>
+                <div class="btn-morph-hint"></div>
+              </div>
+
+              <div class="btn-morph-item" onclick="activateItem31(2)">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                  <div class="btn-morph-badge">3</div>
+                  <div class="btn-morph-title">Kế thừa giá trị truyền thống tốt đẹp kết hợp tiếp thu tiến bộ nhân
+                    loại</div>
+                </div>
+                <div class="btn-morph-hint"></div>
+              </div>
+
+              <div class="btn-morph-item" onclick="activateItem31(3)">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                  <div class="btn-morph-badge">4</div>
+                  <div class="btn-morph-title">Nâng cao chất lượng phong trào xây dựng gia đình văn hóa</div>
+                </div>
+                <div class="btn-morph-hint"></div>
+              </div>
+            </div>
+
+            <!-- Trạng thái 2: Các button nhảy về góc trái xếp từ trên xuống, bên phải hiển thị chi tiết -->
+            <div class="split-layout-active" id="detailLayout31" style="display: none;">
+              <div class="left-sidebar-stack">
+                <button class="btn-return-overview" onclick="resetOverview31()">⟲ Xem lại 4 phương hướng</button>
+                
+                <div class="left-stack-btn" id="stackBtn31-0" onclick="activateItem31(0)">
+                  <div class="btn-morph-badge">1</div>
+                  <div class="left-stack-btn-text">1. Tăng cường sự lãnh đạo của Đảng, nâng cao nhận thức của xã hội về xây dựng và phát triển gia đình</div>
+                </div>
+
+                <div class="left-stack-btn" id="stackBtn31-1" onclick="activateItem31(1)">
+                  <div class="btn-morph-badge">2</div>
+                  <div class="left-stack-btn-text">2. Đẩy mạnh phát triển kinh tế – xã hội, nâng cao đời sống vật chất và kinh tế hộ gia đình</div>
+                </div>
+
+                <div class="left-stack-btn" id="stackBtn31-2" onclick="activateItem31(2)">
+                  <div class="btn-morph-badge">3</div>
+                  <div class="left-stack-btn-text">3. Kế thừa giá trị truyền thống tốt đẹp kết hợp tiếp thu tiến bộ nhân loại</div>
+                </div>
+
+                <div class="left-stack-btn" id="stackBtn31-3" onclick="activateItem31(3)">
+                  <div class="btn-morph-badge">4</div>
+                  <div class="left-stack-btn-text">4. Nâng cao chất lượng phong trào xây dựng gia đình văn hóa</div>
+                </div>
+              </div>
+
+              <div class="right-content-card" id="rightContent31">
+                <!-- Nội dung hiển thị động qua JS -->
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 14: 3.2. TRÁCH NHIỆM SINH VIÊN (CẤU TRÚC HÌNH SAO 5 ĐỈNH ĐỀU NHAU -> NHẢY VỀ GÓC TRÁI) -->
+      <section class="slide" data-slide="14">
+        <div class="slide-header-box">
+          <span class="slide-tag">PHẦN 3: PHƯƠNG HƯỚNG PHÁT TRIỂN VÀ TRÁCH NHIỆM CỦA THẾ HỆ TRẺ</span>
+          <h2 class="slide-title">3.2. Trách nhiệm và hành động thiết thực của bản thân sinh viên nhằm kiến tạo gia đình
+            hạnh phúc</h2>
+          <p class="slide-subtitle">Cấu trúc 5 nhóm hành động hình sao — Nhấp vào bất kỳ mục nào để nhảy về danh sách
+            góc trái và hiển thị chi tiết</p>
+          <div class="static-divider"></div>
+        </div>
+
+        <div class="slide-body">
+          <div class="morph-wrapper" id="morphContainer32">
+
+            <!-- Trạng thái 1: BỐ CỤC HÌNH SAO 5 ĐỈNH KÍCH THƯỚC ĐỀU NHAU -->
+            <div class="star-stage-container" id="starStage32">
+
+              <!-- Đường nối hình sao nghệ thuật -->
+              <svg class="star-svg-lines" viewBox="0 0 960 480">
+                <polygon points="480,60 835,180 715,415 245,415 125,180" stroke="rgba(247, 210, 148, 0.45)"
+                  stroke-width="2" stroke-dasharray="6,4" fill="none" />
+                <line x1="480" y1="240" x2="480" y2="60" stroke="rgba(247, 210, 148, 0.35)" stroke-width="1.5" />
+                <line x1="480" y1="240" x2="835" y2="180" stroke="rgba(247, 210, 148, 0.35)" stroke-width="1.5" />
+                <line x1="480" y1="240" x2="715" y2="415" stroke="rgba(247, 210, 148, 0.35)" stroke-width="1.5" />
+                <line x1="480" y1="240" x2="245" y2="415" stroke="rgba(247, 210, 148, 0.35)" stroke-width="1.5" />
+                <line x1="480" y1="240" x2="125" y2="180" stroke="rgba(247, 210, 148, 0.35)" stroke-width="1.5" />
+              </svg>
+
+              <!-- Tâm hình sao -->
+              <div class="star-center-emblem">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="var(--bg-red-main)">
+                  <polygon
+                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                  </polygon>
+                </svg>
+                <span style="margin-top: 4px;">5 NHÓM<br>HÀNH ĐỘNG</span>
+              </div>
+
+              <!-- 5 Button kích thước đều nhau hoàn toàn -->
+              <div class="star-node-btn star-pos-1" onclick="activateItem32(0)">
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                  <div class="btn-morph-badge" style="width: 26px; height: 26px; font-size: 0.82rem;">a</div>
+                  <strong style="color: var(--text-red); font-size: 0.85rem;">Pháp luật & Tri thức</strong>
+                </div>
+                <div style="font-size: 0.82rem; color: var(--text-dark); line-height: 1.35;">Trang bị tri thức khoa học,
+                  pháp luật và kỹ năng tiền hôn nhân</div>
+              </div>
+
+              <div class="star-node-btn star-pos-2" onclick="activateItem32(1)">
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                  <div class="btn-morph-badge" style="width: 26px; height: 26px; font-size: 0.82rem;">b</div>
+                  <strong style="color: var(--text-red); font-size: 0.85rem;">Văn hóa & Đạo hiếu</strong>
+                </div>
+                <div style="font-size: 0.82rem; color: var(--text-dark); line-height: 1.35;">Rèn luyện bản lĩnh văn hóa,
+                  kế thừa giá trị truyền thống</div>
+              </div>
+
+              <div class="star-node-btn star-pos-3" onclick="activateItem32(2)">
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                  <div class="btn-morph-badge" style="width: 26px; height: 26px; font-size: 0.82rem;">c</div>
+                  <strong style="color: var(--text-red); font-size: 0.85rem;">Nền tảng kinh tế</strong>
+                </div>
+                <div style="font-size: 0.82rem; color: var(--text-dark); line-height: 1.35;">Nỗ lực học tập chuyên môn,
+                  đảm bảo tự chủ tài chính</div>
+              </div>
+
+              <div class="star-node-btn star-pos-4" onclick="activateItem32(3)">
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                  <div class="btn-morph-badge" style="width: 26px; height: 26px; font-size: 0.82rem;">d</div>
+                  <strong style="color: var(--text-red); font-size: 0.85rem;">Bình đẳng & Gắn kết</strong>
+                </div>
+                <div style="font-size: 0.82rem; color: var(--text-dark); line-height: 1.35;">Thực hành bình đẳng giới,
+                  chia sẻ và thời gian chất lượng</div>
+              </div>
+
+              <div class="star-node-btn star-pos-5" onclick="activateItem32(4)">
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                  <div class="btn-morph-badge" style="width: 26px; height: 26px; font-size: 0.82rem;">e</div>
+                  <strong style="color: var(--text-red); font-size: 0.85rem;">Trách nhiệm xã hội</strong>
+                </div>
+                <div style="font-size: 0.82rem; color: var(--text-dark); line-height: 1.35;">Đấu tranh phòng chống tệ
+                  nạn, lan tỏa lối sống văn hóa</div>
+              </div>
+
+            </div>
+
+            <!-- Trạng thái 2: Các button nhảy về góc trái xếp từ trên xuống, bên phải hiển thị chi tiết -->
+            <div class="split-layout-active" id="detailLayout32" style="display: none;">
+              <div class="left-sidebar-stack">
+                <button class="btn-return-overview" onclick="resetOverview32()">⟲ Trở về bố cục hình sao</button>
+
+                <div class="left-stack-btn" id="stackBtn32-0" onclick="activateItem32(0)">
+                  <div class="btn-morph-badge">a</div>
+                  <div class="left-stack-btn-text">a) Trang bị tri thức khoa học, pháp luật và kỹ năng tiền hôn nhân</div>
+                </div>
+
+                <div class="left-stack-btn" id="stackBtn32-1" onclick="activateItem32(1)">
+                  <div class="btn-morph-badge">b</div>
+                  <div class="left-stack-btn-text">b) Rèn luyện bản lĩnh văn hóa, kế thừa giá trị truyền thống và xây dựng sự thấu hiểu</div>
+                </div>
+
+                <div class="left-stack-btn" id="stackBtn32-2" onclick="activateItem32(2)">
+                  <div class="btn-morph-badge">c</div>
+                  <div class="left-stack-btn-text">c) Nỗ lực học tập, nâng cao trình độ chuyên môn để đảm bảo nền tảng kinh tế vững chắc</div>
+                </div>
+
+                <div class="left-stack-btn" id="stackBtn32-3" onclick="activateItem32(3)">
+                  <div class="btn-morph-badge">d</div>
+                  <div class="left-stack-btn-text">d) Thực hành nguyên tắc bình đẳng giới, chia sẻ và tôn trọng trong gia đình tương lai</div>
+                </div>
+
+                <div class="left-stack-btn" id="stackBtn32-4" onclick="activateItem32(4)">
+                  <div class="btn-morph-badge">e</div>
+                  <div class="left-stack-btn-text">e) Sống có trách nhiệm xã hội, tích cực đấu tranh phòng chống tệ nạn</div>
+                </div>
+              </div>
+
+              <div class="right-content-card" id="rightContent32">
+                <!-- Nội dung hiển thị động qua JS -->
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 15: KẾT LUẬN CHUNG (LỜI BÁC HỒ & ĐÚC KẾT) -->
+      <section class="slide" data-slide="15">
+        <div class="slide-header-box">
+          <span class="slide-tag">TỔNG KẾT BÁO CÁO</span>
+          <h2 class="slide-title">KẾT LUẬN CHUNG</h2>
+          <div class="static-divider"></div>
+        </div>
+
+        <div class="slide-body">
+          <div class="milk-card" style="max-width: 950px; width: 100%;">
+            <div class="card-top-badge">Ý nghĩa khoa học & Lời dạy của Bác Hồ</div>
+            <div class="card-content" style="font-size: 1.08rem; line-height: 1.85;">
+              <p>Nghiên cứu sự biến đổi của gia đình Việt Nam hiện nay dưới ánh sáng lý luận của Chủ nghĩa xã hội khoa
+                học cung cấp một góc nhìn khách quan, khoa học và toàn diện. Sự chuyển biến của gia đình về quy mô, chức
+                năng và các mối quan hệ là kết quả tất yếu của công cuộc Đổi mới và hội nhập quốc tế. Nhận diện chính
+                xác những khó khăn, thách thức thực tiễn là cơ sở để ban hành chính sách vĩ mô phù hợp và định hướng
+                hành động cho mỗi cá nhân.</p>
+
+              <div
+                style="margin: 18px 0; padding: 16px 22px; background: rgba(158, 24, 33, 0.08); border-left: 4px solid var(--bg-red-main); border-radius: 0 12px 12px 0;">
+                <p style="font-style: italic; font-weight: 600; color: var(--text-red); margin-bottom: 6px;">
+                  Đúng như Chủ tịch Hồ Chí Minh đã từng khẳng định: "Nhiều gia đình cộng lại mới thành xã hội, xã hội
+                  tốt thì gia đình càng tốt, gia đình tốt thì xã hội mới tốt. Hạt nhân của xã hội chính là gia đình."
+                </p>
+              </div>
+
+              <p>Mỗi sinh viên hôm nay, bằng tri thức, bản lĩnh và lòng yêu thương chân thành, cần nâng cao ý thức trách
+                nhiệm để vừa gìn giữ mái ấm hiện tại, vừa chuẩn bị hành trang vững chắc cho tổ ấm tương lai, góp phần
+                thúc đẩy sự phát triển bền vững của đất nước.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 16: SLIDE KẾT THÚC THEO YÊU CẦU -->
+      <section class="slide" data-slide="16">
+        <div class="ending-slide-container">
+          <div class="hero-main-badge">BẾ MẠC BÁO CÁO</div>
+          <h2 class="ending-title">Cảm ơn các bạn đã lắng nghe!</h2>
+          <div class="static-divider" style="width: 140px; height: 5px;"></div>
+
+          <div class="milk-card" style="margin-top: 30px; max-width: 620px; padding: 22px 32px; text-align: center;">
+            <p style="font-size: 1.1rem; font-weight: 700; color: var(--text-red); margin-bottom: 6px;">Học phần: Chủ
+              nghĩa xã hội khoa học</p>
+            <p style="font-size: 0.95rem; color: var(--text-muted);">Chúc các bạn và gia đình luôn dồi dào sức khỏe, ấm
+              no và hạnh phúc!</p>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Bottom Navigation: CHỈ ĐỂ LẠI SỐ THỨ TỰ TRANG VÀ 2 NÚT TIẾN/LÙI -->
+  <footer class="bottom-bar">
+    <div class="slide-counter" id="slideCounter">1 <span>/ 16</span></div>
+
+    <div class="nav-controls">
+      <button class="btn-nav" id="btnPrev" title="Slide trước (Mũi tên trái)">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
+
+      <button class="btn-nav" id="btnNext" title="Slide tiếp theo (Mũi tên phải hoặc Phím cách)">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
+    </div>
+  </footer>
+
+  <script>
+    // Dữ liệu nội dung chi tiết mục 3.1
+    const contentData31 = [
+      {
+        title: "1. Tăng cường sự lãnh đạo của Đảng, nâng cao nhận thức của xã hội về xây dựng và phát triển gia đình",
+        html: `
+          <p style="font-size: 1.12rem; line-height: 1.85;">Đặt công tác gia đình là một nội dung quan trọng trong phát triển kinh tế – xã hội;</p>
+          <div style="margin: 16px 0; padding: 14px 20px; background: rgba(158,24,33,0.08); border-left: 4px solid var(--bg-red-main); border-radius: 0 10px 10px 0;">
+            <p style="font-weight: 700; color: var(--text-red); font-size: 1.15rem;">Coi "đầu tư cho gia đình là đầu tư cho phát triển bền vững".</p>
+          </div>
+        `
+      },
+      {
+        title: "2. Đẩy mạnh phát triển kinh tế – xã hội, nâng cao đời sống vật chất và kinh tế hộ gia đình",
+        html: `
+          <p style="font-size: 1.12rem; line-height: 1.85;">Ban hành chính sách hỗ trợ hộ gia đình tiếp cận vốn, công nghệ, chuyển đổi số;</p>
+          <p style="font-size: 1.12rem; line-height: 1.85;">Tăng cường an sinh xã hội, giải quyết việc làm và xây dựng hạ tầng dịch vụ chăm sóc trẻ em, người cao tuổi.</p>
+        `
+      },
+      {
+        title: "3. Kế thừa giá trị truyền thống tốt đẹp kết hợp tiếp thu tiến bộ nhân loại",
+        html: `
+          <p style="font-size: 1.12rem; line-height: 1.85;"><strong style="color: var(--text-red);">"Gạn đục khơi trong"</strong> — duy trì nếp sống hiếu thảo, tình nghĩa, thủy chung;</p>
+          <p style="font-size: 1.12rem; line-height: 1.85;">Loại bỏ tư tưởng gia trưởng, bất bình đẳng giới;</p>
+          <p style="font-size: 1.12rem; line-height: 1.85;">Tiếp thu chuẩn mực dân chủ, tôn trọng quyền cá nhân.</p>
+        `
+      },
+      {
+
+        title: "4. Nâng cao chất lượng phong trào xây dựng gia đình văn hóa",
+        html: `
+          <p style="font-size: 1.12rem; line-height: 1.85;">Xây dựng hệ giá trị gia đình Việt Nam (ấm no, tiến bộ, hạnh phúc, văn minh) gắn với Chiến lược phát triển gia đình Việt Nam đến năm 2030 (Quyết định số 2238/QĐ-TTg của Thủ tướng Chính phủ).</p>
+        `
+      }
+    ];
+
+    // Dữ liệu nội dung chi tiết mục 3.2
+    const contentData32 = [
+      {
+        badge: "Hành động a / e",
+        title: "a) Trang bị tri thức khoa học, pháp luật và kỹ năng tiền hôn nhân",
+        html: `
+          <ul style="font-size: 1.08rem; line-height: 1.85;">
+            <li>Chủ động nghiên cứu, nắm vững các quy định pháp luật về nghĩa vụ và quyền lợi gia đình (Hiến pháp, Luật Hôn nhân và Gia đình, Luật Bình đẳng giới, Luật Phòng, chống bạo lực gia đình).</li>
+            <li>Xây dựng quan niệm tình yêu chân chính, tiến bộ, dựa trên sự tự nguyện và trách nhiệm moral-pháp lý; kiên quyết bác bỏ lối sống thực dụng hoặc "sống thử" buông thả, thiếu trách nhiệm.</li>
+          </ul>
+        `
+      },
+      {
+        badge: "Hành động b / e",
+        title: "b) Rèn luyện bản lĩnh văn hóa, kế thừa giá trị truyền thống và xây dựng sự thấu hiểu",
+        html: `
+          <ul style="font-size: 1.08rem; line-height: 1.85;">
+            <li>Thực hành đạo hiếu, sự tôn trọng và yêu thương đối với ông bà, cha mẹ trong gia đình hiện tại.</li>
+            <li>Chủ động thiết lập không gian chia sẻ, kiên nhẫn lắng nghe để xóa bỏ rào cản khoảng cách thế hệ; kiên quyết loại bỏ tư tưởng gia trưởng và tâm lý trọng nam khinh nữ.</li>
+          </ul>
+        `
+      },
+      {
+        badge: "Hành động c / e",
+        title: "c) Nỗ lực học tập, nâng cao trình độ chuyên môn để đảm bảo nền tảng kinh tế vững chắc",
+        html: `
+          <p style="font-size: 1.1rem; line-height: 1.85;">Tích cực học tập tri thức, kỹ năng nghề nghiệp và năng lực số để đảm bảo khả năng tự chủ tài chính cá nhân.</p>
+          <div style="margin-top: 14px; padding: 12px 18px; background: rgba(158,24,33,0.08); border-left: 4px solid var(--bg-red-main); border-radius: 0 10px 10px 0;">
+            <p style="font-weight: 600; color: var(--text-dark); line-height: 1.7;">Sự vững vàng về kinh tế là tiền đề vật chất trực tiếp giúp giảm thiểu áp lực mưu sinh, bảo vệ sự ổn định cho mái ấm tương lai.</p>
+          </div>
+        `
+      },
+      {
+        badge: "Hành động d / e",
+        title: "d) Thực hành nguyên tắc bình đẳng giới, chia sẻ và tôn trọng trong gia đình tương lai",
+        html: `
+          <ul style="font-size: 1.08rem; line-height: 1.85;">
+            <li>Xây dựng mô hình "vợ chồng cùng làm chủ gia đình": chủ động chia sẻ công việc nhà, phối hợp nuôi dạy con cái và cùng bàn bạc quyết định các vấn đề lớn.</li>
+            <li>Duy trì thói quen giao tiếp trực tiếp, dành "thời gian chất lượng" cho gia đình, kiểm soát việc sử dụng thiết bị điện tử để bảo vệ sợi dây liên kết cảm xúc.</li>
+          </ul>
+        `
+      },
+      {
+        badge: "Hành động e / e",
+        title: "e) Sống có trách nhiệm xã hội, tích cực đấu tranh phòng chống tệ nạn",
+        html: `
+          <ul style="font-size: 1.08rem; line-height: 1.85;">
+            <li>Bản thân kiên quyết nói không với ma túy, cờ bạc, bạo lực và các hành vi lệch chuẩn xã hội.</li>
+            <li>Tích cực tham gia các phong trào xây dựng đời sống văn hóa tại địa phương, góp phần lan tỏa các giá trị gia đình chuẩn mực ra cộng đồng.</li>
+          </ul>
+        `
+      }
+    ];
+
+    // Trạng thái tương tác nội bộ cho 3.1 & 3.2
+    let activeIndex31 = -1; // -1: overview
+    let activeIndex32 = -1; // -1: overview
+
+    window.activateItem31 = function (idx) {
+      activeIndex31 = idx;
+      document.getElementById('overviewGrid31').style.display = 'none';
+      document.getElementById('detailLayout31').style.display = 'flex';
+
+      for (let i = 0; i < 4; i++) {
+        const btn = document.getElementById(`stackBtn31-${i}`);
+        btn.classList.toggle('active-item', i === idx);
+      }
+
+      const item = contentData31[idx];
+      document.getElementById('rightContent31').innerHTML = `
+        <div class="card-top-badge">${item.badge}</div>
+        <div class="card-title">${item.title}</div>
+        <div class="card-content">${item.html}</div>
+      `;
+    };
+
+    window.resetOverview31 = function () {
+      activeIndex31 = -1;
+      document.getElementById('overviewGrid31').style.display = 'grid';
+      document.getElementById('detailLayout31').style.display = 'none';
+    };
+
+    window.activateItem32 = function (idx) {
+      activeIndex32 = idx;
+      document.getElementById('starStage32').style.display = 'none';
+      document.getElementById('detailLayout32').style.display = 'flex';
+
+      for (let i = 0; i < 5; i++) {
+        const btn = document.getElementById(`stackBtn32-${i}`);
+        btn.classList.toggle('active-item', i === idx);
+      }
+
+      const item = contentData32[idx];
+      document.getElementById('rightContent32').innerHTML = `
+        <div class="card-top-badge">${item.badge}</div>
+        <div class="card-title">${item.title}</div>
+        <div class="card-content">${item.html}</div>
+      `;
+    };
+
+    window.resetOverview32 = function () {
+      activeIndex32 = -1;
+      document.getElementById('starStage32').style.display = 'block';
+      document.getElementById('detailLayout32').style.display = 'none';
+    };
+
+    // Quản lý Slide Deck
+    document.addEventListener('DOMContentLoaded', () => {
+      const slides = Array.from(document.querySelectorAll('.slide'));
+      const totalSlides = slides.length;
+      let currentSlide = 0;
+
+      const progressFill = document.getElementById('progressFill');
+      const slideCounter = document.getElementById('slideCounter');
+      const btnPrev = document.getElementById('btnPrev');
+      const btnNext = document.getElementById('btnNext');
+      const btnFullscreen = document.getElementById('btnFullscreen');
+
+      function updateSlideUI() {
+        slides.forEach((slide, idx) => {
+          slide.classList.remove('active', 'prev-slide', 'next-slide');
+          if (idx === currentSlide) {
+            slide.classList.add('active');
+          } else if (idx < currentSlide) {
+            slide.classList.add('prev-slide');
+          } else {
+            slide.classList.add('next-slide');
+          }
+        });
+
+        const progressPercent = ((currentSlide + 1) / totalSlides) * 100;
+        progressFill.style.width = `${progressPercent}%`;
+        slideCounter.innerHTML = `${currentSlide + 1} <span>/ ${totalSlides}</span>`;
+
+        btnPrev.disabled = currentSlide === 0;
+        btnNext.disabled = currentSlide === totalSlides - 1;
+      }
+
+      function goToSlide(index) {
+        if (index < 0 || index >= totalSlides) return;
+        currentSlide = index;
+        updateSlideUI();
+      }
+
+      function handleNext() {
+        // Nếu đang ở slide 13 (index 12): Mục 3.1
+        if (currentSlide === 12) {
+          if (activeIndex31 === -1) {
+            activateItem31(0);
+            return;
+          } else if (activeIndex31 < 3) {
+            activateItem31(activeIndex31 + 1);
+            return;
+          }
+        }
+
+        // Nếu đang ở slide 14 (index 13): Mục 3.2
+        if (currentSlide === 13) {
+          if (activeIndex32 === -1) {
+            activateItem32(0);
+            return;
+          } else if (activeIndex32 < 4) {
+            activateItem32(activeIndex32 + 1);
+            return;
+          }
+        }
+
+        // Chuyển sang slide tiếp theo
+        if (currentSlide < totalSlides - 1) {
+          goToSlide(currentSlide + 1);
+        }
+      }
+
+      function handlePrev() {
+        // Nếu đang ở slide 13 (index 12) trong trạng thái chi tiết
+        if (currentSlide === 12) {
+          if (activeIndex31 > 0) {
+            activateItem31(activeIndex31 - 1);
+            return;
+          } else if (activeIndex31 === 0) {
+            resetOverview31();
+            return;
+          }
+        }
+
+        // Nếu đang ở slide 14 (index 13) trong trạng thái chi tiết
+        if (currentSlide === 13) {
+          if (activeIndex32 > 0) {
+            activateItem32(activeIndex32 - 1);
+            return;
+          } else if (activeIndex32 === 0) {
+            resetOverview32();
+            return;
+          }
+        }
+
+        // Chuyển về slide trước đó
+        if (currentSlide > 0) {
+          goToSlide(currentSlide - 1);
+        }
+      }
+
+      function toggleFullscreen() {
+        if (!document.fullscreenElement) {
+          document.documentElement.requestFullscreen().catch(() => { });
+        } else if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+      }
+
+      btnNext.addEventListener('click', handleNext);
+      btnPrev.addEventListener('click', handlePrev);
+      btnFullscreen.addEventListener('click', toggleFullscreen);
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') {
+          e.preventDefault();
+          handleNext();
+        } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+          e.preventDefault();
+          handlePrev();
+        } else if (e.key === 'Home') {
+          goToSlide(0);
+        } else if (e.key === 'End') {
+          goToSlide(totalSlides - 1);
+        }
+      });
+
+      updateSlideUI();
+    });
+  </script>
+</body>
+
+</html>
