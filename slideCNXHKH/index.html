@@ -790,18 +790,63 @@
       box-shadow: var(--beige-shadow);
       display: flex;
       flex-direction: column;
-      animation: fadeInContent 0.35s ease forwards;
+      position: relative;
+      transform-origin: 0% 50%;
+      will-change: transform, opacity, filter;
     }
 
-    @keyframes fadeInContent {
+    /* Animation: Content nở/chui ra từ button được nhấn */
+    .anim-sprout-from-button {
+      animation: sproutFromButton 0.38s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+    }
+
+    @keyframes sproutFromButton {
       0% {
         opacity: 0;
-        transform: scale(0.97);
+        transform: scale(0.08) translateX(-50px);
+        filter: blur(8px);
       }
-
+      60% {
+        opacity: 0.95;
+        filter: blur(0);
+      }
       100% {
         opacity: 1;
-        transform: scale(1);
+        transform: scale(1) translateX(0);
+      }
+    }
+
+    /* Animation: Content thu vào button cũ */
+    .anim-shrink-into-button {
+      animation: shrinkIntoButton 0.22s cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
+    }
+
+    @keyframes shrinkIntoButton {
+      0% {
+        opacity: 1;
+        transform: scale(1) translateX(0);
+        filter: blur(0);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(0.08) translateX(-50px);
+        filter: blur(8px);
+      }
+    }
+
+    /* Animation trượt vào của các button cột trái */
+    .left-sidebar-stack {
+      animation: sidebarStackIn 0.38s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes sidebarStackIn {
+      0% {
+        opacity: 0;
+        transform: translateX(-35px) scale(0.96);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(0) scale(1);
       }
     }
 
@@ -1572,52 +1617,16 @@
         </div>
       </section>
 
-      <!-- SLIDE 15: KẾT LUẬN CHUNG (LỜI BÁC HỒ & ĐÚC KẾT) -->
+      <!-- SLIDE 15: SLIDE KẾT THÚC THEO YÊU CẦU -->
       <section class="slide" data-slide="15">
-        <div class="slide-header-box">
-          <span class="slide-tag">TỔNG KẾT BÁO CÁO</span>
-          <h2 class="slide-title">KẾT LUẬN CHUNG</h2>
-          <div class="static-divider"></div>
-        </div>
-
-        <div class="slide-body">
-          <div class="milk-card" style="max-width: 950px; width: 100%;">
-            <div class="card-top-badge">Ý nghĩa khoa học & Lời dạy của Bác Hồ</div>
-            <div class="card-content" style="font-size: 1.08rem; line-height: 1.85;">
-              <p>Nghiên cứu sự biến đổi của gia đình Việt Nam hiện nay dưới ánh sáng lý luận của Chủ nghĩa xã hội khoa
-                học cung cấp một góc nhìn khách quan, khoa học và toàn diện. Sự chuyển biến của gia đình về quy mô, chức
-                năng và các mối quan hệ là kết quả tất yếu của công cuộc Đổi mới và hội nhập quốc tế. Nhận diện chính
-                xác những khó khăn, thách thức thực tiễn là cơ sở để ban hành chính sách vĩ mô phù hợp và định hướng
-                hành động cho mỗi cá nhân.</p>
-
-              <div
-                style="margin: 18px 0; padding: 16px 22px; background: rgba(158, 24, 33, 0.08); border-left: 4px solid var(--bg-red-main); border-radius: 0 12px 12px 0;">
-                <p style="font-style: italic; font-weight: 600; color: var(--text-red); margin-bottom: 6px;">
-                  Đúng như Chủ tịch Hồ Chí Minh đã từng khẳng định: "Nhiều gia đình cộng lại mới thành xã hội, xã hội
-                  tốt thì gia đình càng tốt, gia đình tốt thì xã hội mới tốt. Hạt nhân của xã hội chính là gia đình."
-                </p>
-              </div>
-
-              <p>Mỗi sinh viên hôm nay, bằng tri thức, bản lĩnh và lòng yêu thương chân thành, cần nâng cao ý thức trách
-                nhiệm để vừa gìn giữ mái ấm hiện tại, vừa chuẩn bị hành trang vững chắc cho tổ ấm tương lai, góp phần
-                thúc đẩy sự phát triển bền vững của đất nước.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- SLIDE 16: SLIDE KẾT THÚC THEO YÊU CẦU -->
-      <section class="slide" data-slide="16">
         <div class="ending-slide-container">
           <div class="hero-main-badge">BẾ MẠC BÁO CÁO</div>
           <h2 class="ending-title">Cảm ơn các bạn đã lắng nghe!</h2>
           <div class="static-divider" style="width: 140px; height: 5px;"></div>
 
           <div class="milk-card" style="margin-top: 30px; max-width: 620px; padding: 22px 32px; text-align: center;">
-            <p style="font-size: 1.1rem; font-weight: 700; color: var(--text-red); margin-bottom: 6px;">Học phần: Chủ
-              nghĩa xã hội khoa học</p>
-            <p style="font-size: 0.95rem; color: var(--text-muted);">Chúc các bạn và gia đình luôn dồi dào sức khỏe, ấm
-              no và hạnh phúc!</p>
+            <p style="font-size: 1.1rem; font-weight: 700; color: var(--text-red); margin-bottom: 6px;">Học phần: Chủ nghĩa xã hội khoa học</p>
+            <p style="font-size: 0.95rem; color: var(--text-muted);">Chúc các bạn và gia đình luôn dồi dào sức khỏe, ấm no và hạnh phúc!</p>
           </div>
         </div>
       </section>
@@ -1627,7 +1636,7 @@
 
   <!-- Bottom Navigation: CHỈ ĐỂ LẠI SỐ THỨ TỰ TRANG VÀ 2 NÚT TIẾN/LÙI -->
   <footer class="bottom-bar">
-    <div class="slide-counter" id="slideCounter">1 <span>/ 16</span></div>
+    <div class="slide-counter" id="slideCounter">1 <span>/ 15</span></div>
 
     <div class="nav-controls">
       <button class="btn-nav" id="btnPrev" title="Slide trước (Mũi tên trái)">
@@ -1737,53 +1746,223 @@
     // Trạng thái tương tác nội bộ cho 3.1 & 3.2
     let activeIndex31 = -1; // -1: overview
     let activeIndex32 = -1; // -1: overview
+    let isTransitioning31 = false;
+    let isTransitioning32 = false;
 
     window.activateItem31 = function (idx) {
-      activeIndex31 = idx;
-      document.getElementById('overviewGrid31').style.display = 'none';
-      document.getElementById('detailLayout31').style.display = 'flex';
+      if (isTransitioning31) return;
+      const overviewEl = document.getElementById('overviewGrid31');
+      const detailLayoutEl = document.getElementById('detailLayout31');
+      const rightCard = document.getElementById('rightContent31');
+      const newBtn = document.getElementById(`stackBtn31-${idx}`);
 
-      for (let i = 0; i < 4; i++) {
-        const btn = document.getElementById(`stackBtn31-${i}`);
-        btn.classList.toggle('active-item', i === idx);
+      // Nếu đang ở màn hình tổng quan ban đầu
+      if (activeIndex31 === -1) {
+        activeIndex31 = idx;
+        overviewEl.style.display = 'none';
+        detailLayoutEl.style.display = 'flex';
+
+        for (let i = 0; i < 4; i++) {
+          document.getElementById(`stackBtn31-${i}`).classList.toggle('active-item', i === idx);
+        }
+
+        const item = contentData31[idx];
+        rightCard.innerHTML = `
+          <div class="card-top-badge">${item.badge}</div>
+          <div class="card-title">${item.title}</div>
+          <div class="card-content">${item.html}</div>
+        `;
+
+        // Tính vị trí button để content chui ra từ button đó
+        const newRect = newBtn.getBoundingClientRect();
+        const cardRect = rightCard.getBoundingClientRect();
+        const originY = Math.max(20, (newRect.top + newRect.height / 2) - cardRect.top);
+        rightCard.style.transformOrigin = `0px ${originY}px`;
+
+        rightCard.classList.remove('anim-shrink-into-button');
+        rightCard.classList.remove('anim-sprout-from-button');
+        void rightCard.offsetWidth; // reflow
+        rightCard.classList.add('anim-sprout-from-button');
+        return;
       }
 
-      const item = contentData31[idx];
-      document.getElementById('rightContent31').innerHTML = `
-        <div class="card-top-badge">${item.badge}</div>
-        <div class="card-title">${item.title}</div>
-        <div class="card-content">${item.html}</div>
-      `;
+      // Nếu đang ở màn hình chi tiết và bấm vào 1 button khác
+      if (activeIndex31 === idx) return;
+
+      isTransitioning31 = true;
+      const oldBtn = document.getElementById(`stackBtn31-${activeIndex31}`);
+      const oldRect = oldBtn.getBoundingClientRect();
+      const cardRect = rightCard.getBoundingClientRect();
+      const oldOriginY = Math.max(20, (oldRect.top + oldRect.height / 2) - cardRect.top);
+
+      // Thu vào button cũ
+      rightCard.style.transformOrigin = `0px ${oldOriginY}px`;
+      rightCard.classList.remove('anim-sprout-from-button');
+      rightCard.classList.add('anim-shrink-into-button');
+      oldBtn.classList.remove('active-item');
+
+      setTimeout(() => {
+        activeIndex31 = idx;
+        newBtn.classList.add('active-item');
+
+        const item = contentData31[idx];
+        rightCard.innerHTML = `
+          <div class="card-top-badge">${item.badge}</div>
+          <div class="card-title">${item.title}</div>
+          <div class="card-content">${item.html}</div>
+        `;
+
+        // Chui ra từ button mới được ấn
+        const newRect = newBtn.getBoundingClientRect();
+        const newOriginY = Math.max(20, (newRect.top + newRect.height / 2) - cardRect.top);
+        rightCard.style.transformOrigin = `0px ${newOriginY}px`;
+
+        rightCard.classList.remove('anim-shrink-into-button');
+        void rightCard.offsetWidth;
+        rightCard.classList.add('anim-sprout-from-button');
+
+        setTimeout(() => {
+          isTransitioning31 = false;
+        }, 380);
+      }, 220);
     };
 
     window.resetOverview31 = function () {
-      activeIndex31 = -1;
-      document.getElementById('overviewGrid31').style.display = 'grid';
-      document.getElementById('detailLayout31').style.display = 'none';
+      if (isTransitioning31) return;
+      const detailLayoutEl = document.getElementById('detailLayout31');
+      const rightCard = document.getElementById('rightContent31');
+      const overviewEl = document.getElementById('overviewGrid31');
+
+      if (activeIndex31 !== -1) {
+        isTransitioning31 = true;
+        const oldBtn = document.getElementById(`stackBtn31-${activeIndex31}`);
+        const oldRect = oldBtn.getBoundingClientRect();
+        const cardRect = rightCard.getBoundingClientRect();
+        const oldOriginY = Math.max(20, (oldRect.top + oldRect.height / 2) - cardRect.top);
+        rightCard.style.transformOrigin = `0px ${oldOriginY}px`;
+        rightCard.classList.remove('anim-sprout-from-button');
+        rightCard.classList.add('anim-shrink-into-button');
+
+        setTimeout(() => {
+          activeIndex31 = -1;
+          detailLayoutEl.style.display = 'none';
+          overviewEl.style.display = 'grid';
+          rightCard.classList.remove('anim-shrink-into-button');
+          isTransitioning31 = false;
+        }, 220);
+      } else {
+        activeIndex31 = -1;
+        detailLayoutEl.style.display = 'none';
+        overviewEl.style.display = 'grid';
+      }
     };
 
     window.activateItem32 = function (idx) {
-      activeIndex32 = idx;
-      document.getElementById('starStage32').style.display = 'none';
-      document.getElementById('detailLayout32').style.display = 'flex';
+      if (isTransitioning32) return;
+      const starStageEl = document.getElementById('starStage32');
+      const detailLayoutEl = document.getElementById('detailLayout32');
+      const rightCard = document.getElementById('rightContent32');
+      const newBtn = document.getElementById(`stackBtn32-${idx}`);
 
-      for (let i = 0; i < 5; i++) {
-        const btn = document.getElementById(`stackBtn32-${i}`);
-        btn.classList.toggle('active-item', i === idx);
+      // Nếu đang ở màn hình hình sao ban đầu
+      if (activeIndex32 === -1) {
+        activeIndex32 = idx;
+        starStageEl.style.display = 'none';
+        detailLayoutEl.style.display = 'flex';
+
+        for (let i = 0; i < 5; i++) {
+          document.getElementById(`stackBtn32-${i}`).classList.toggle('active-item', i === idx);
+        }
+
+        const item = contentData32[idx];
+        rightCard.innerHTML = `
+          <div class="card-top-badge">${item.badge}</div>
+          <div class="card-title">${item.title}</div>
+          <div class="card-content">${item.html}</div>
+        `;
+
+        // Tính vị trí button để content chui ra từ button đó
+        const newRect = newBtn.getBoundingClientRect();
+        const cardRect = rightCard.getBoundingClientRect();
+        const originY = Math.max(20, (newRect.top + newRect.height / 2) - cardRect.top);
+        rightCard.style.transformOrigin = `0px ${originY}px`;
+
+        rightCard.classList.remove('anim-shrink-into-button');
+        rightCard.classList.remove('anim-sprout-from-button');
+        void rightCard.offsetWidth; // reflow
+        rightCard.classList.add('anim-sprout-from-button');
+        return;
       }
 
-      const item = contentData32[idx];
-      document.getElementById('rightContent32').innerHTML = `
-        <div class="card-top-badge">${item.badge}</div>
-        <div class="card-title">${item.title}</div>
-        <div class="card-content">${item.html}</div>
-      `;
+      // Nếu đang ở màn hình chi tiết và bấm vào 1 button khác
+      if (activeIndex32 === idx) return;
+
+      isTransitioning32 = true;
+      const oldBtn = document.getElementById(`stackBtn32-${activeIndex32}`);
+      const oldRect = oldBtn.getBoundingClientRect();
+      const cardRect = rightCard.getBoundingClientRect();
+      const oldOriginY = Math.max(20, (oldRect.top + oldRect.height / 2) - cardRect.top);
+
+      // Thu vào button cũ
+      rightCard.style.transformOrigin = `0px ${oldOriginY}px`;
+      rightCard.classList.remove('anim-sprout-from-button');
+      rightCard.classList.add('anim-shrink-into-button');
+      oldBtn.classList.remove('active-item');
+
+      setTimeout(() => {
+        activeIndex32 = idx;
+        newBtn.classList.add('active-item');
+
+        const item = contentData32[idx];
+        rightCard.innerHTML = `
+          <div class="card-top-badge">${item.badge}</div>
+          <div class="card-title">${item.title}</div>
+          <div class="card-content">${item.html}</div>
+        `;
+
+        // Chui ra từ button mới được ấn
+        const newRect = newBtn.getBoundingClientRect();
+        const newOriginY = Math.max(20, (newRect.top + newRect.height / 2) - cardRect.top);
+        rightCard.style.transformOrigin = `0px ${newOriginY}px`;
+
+        rightCard.classList.remove('anim-shrink-into-button');
+        void rightCard.offsetWidth;
+        rightCard.classList.add('anim-sprout-from-button');
+
+        setTimeout(() => {
+          isTransitioning32 = false;
+        }, 380);
+      }, 220);
     };
 
     window.resetOverview32 = function () {
-      activeIndex32 = -1;
-      document.getElementById('starStage32').style.display = 'block';
-      document.getElementById('detailLayout32').style.display = 'none';
+      if (isTransitioning32) return;
+      const detailLayoutEl = document.getElementById('detailLayout32');
+      const rightCard = document.getElementById('rightContent32');
+      const starStageEl = document.getElementById('starStage32');
+
+      if (activeIndex32 !== -1) {
+        isTransitioning32 = true;
+        const oldBtn = document.getElementById(`stackBtn32-${activeIndex32}`);
+        const oldRect = oldBtn.getBoundingClientRect();
+        const cardRect = rightCard.getBoundingClientRect();
+        const oldOriginY = Math.max(20, (oldRect.top + oldRect.height / 2) - cardRect.top);
+        rightCard.style.transformOrigin = `0px ${oldOriginY}px`;
+        rightCard.classList.remove('anim-sprout-from-button');
+        rightCard.classList.add('anim-shrink-into-button');
+
+        setTimeout(() => {
+          activeIndex32 = -1;
+          detailLayoutEl.style.display = 'none';
+          starStageEl.style.display = 'block';
+          rightCard.classList.remove('anim-shrink-into-button');
+          isTransitioning32 = false;
+        }, 220);
+      } else {
+        activeIndex32 = -1;
+        detailLayoutEl.style.display = 'none';
+        starStageEl.style.display = 'block';
+      }
     };
 
     // Quản lý Slide Deck
